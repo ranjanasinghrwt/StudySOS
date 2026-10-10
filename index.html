@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f8f5ff">
+    <title>StudySOS — Your study era starts here</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./script.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="#dashboard" aria-label="StudySOS home">
+            <span class="brand-mark" aria-hidden="true">S</span>
+            <span>Study<span class="brand-accent">SOS</span></span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+            <a href="#dashboard">Dashboard</a>
+            <a href="#subjects">Subjects</a>
+            <a href="#progress">Progress</a>
+            <a href="#sos">SOS mode</a>
+        </nav>
+        <span id="save-status" class="save-status" role="status">Saved on this device</span>
+    </header>
+
+    <main id="dashboard" class="dashboard">
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow"><span class="eyebrow-dot"></span> YOUR PERSONAL STUDY SPACE</p>
+                <h1>Your study era <span>starts here.</span></h1>
+                <p class="hero-subtitle">Make exam preparation feel simpler. Build a plan, focus on what matters, and celebrate every step forward.</p>
+                <a class="button button-hero" href="#sos" id="hero-sos">
+                    <span aria-hidden="true">✦</span> Enter SOS mode
+                </a>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+                <span class="art-orbit orbit-one"></span>
+                <span class="art-orbit orbit-two"></span>
+                <span class="art-star star-one">✦</span>
+                <span class="art-star star-two">✧</span>
+                <div class="art-book"><span>STUDY<br>SMART</span><b>✦</b></div>
+                <span class="art-dot"></span>
+            </div>
+        </section>
+
+        <section class="overview-grid" aria-label="Study overview">
+            <article class="overview-card countdown-overview">
+                <span class="overview-icon" aria-hidden="true">◷</span>
+                <p class="overview-label">NEXT EXAM</p>
+                <strong id="days-remaining" class="overview-value">—</strong>
+                <span id="exam-overview-label" class="overview-detail">Set a date to begin your countdown</span>
+            </article>
+            <article class="overview-card subjects-overview">
+                <span class="overview-icon" aria-hidden="true">▤</span>
+                <p class="overview-label">MY SUBJECTS</p>
+                <strong id="subjects-total" class="overview-value">0</strong>
+                <span id="topics-total" class="overview-detail">0 topics to revise</span>
+            </article>
+            <article class="overview-card progress-overview">
+                <span class="overview-icon" aria-hidden="true">↗</span>
+                <p class="overview-label">STUDY PROGRESS</p>
+                <strong id="overview-progress" class="overview-value">0%</strong>
+                <span class="overview-detail">Every completed topic counts</span>
+            </article>
+        </section>
+
+        <section class="card countdown-card" aria-labelledby="countdown-heading">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">A LITTLE MOTIVATION</p>
+                    <h2 id="countdown-heading">Your exam countdown</h2>
+                </div>
+                <span class="icon-badge" aria-hidden="true">⌛</span>
+            </div>
+            <form id="exam-form" class="exam-form">
+                <label class="sr-only" for="exam-date">Exam date and time</label>
+                <input id="exam-date" type="datetime-local">
+                <button class="button button-primary" type="submit">Set exam</button>
+                <button class="button button-secondary" id="clear-exam" type="button">Clear</button>
+            </form>
+            <p id="countdown-timer" class="countdown-timer" aria-live="polite">Set an exam date to start your countdown.</p>
+        </section>
+
+        <div class="content-grid">
+            <section id="subjects" class="card manager-card" aria-labelledby="manager-heading">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">MAKE YOUR PLAN</p>
+                        <h2 id="manager-heading">Subjects &amp; topics</h2>
+                    </div>
+                    <span class="section-note">Small steps, big momentum</span>
+                </div>
+
+                <form id="subject-form" class="form-row">
+                    <label class="sr-only" for="subject-input">Subject name</label>
+                    <input id="subject-input" type="text" maxlength="60" placeholder="Add a subject, e.g. Biology" required>
+                    <button class="button button-primary" id="add-subject" type="submit">Add subject</button>
+                </form>
+                <ul id="subject-list" class="subject-list" aria-label="Subjects"></ul>
+
+                <div class="divider"></div>
+
+                <form id="topic-form" class="form-row topic-form">
+                    <label class="sr-only" for="topic-input">Topic name</label>
+                    <input id="topic-input" type="text" maxlength="100" placeholder="Add a topic" required>
+                    <label class="sr-only" for="topic-subject">Topic subject</label>
+                    <select id="topic-subject" aria-label="Subject for the new topic" required></select>
+                    <button class="button button-primary" id="add-topic" type="submit">Add topic</button>
+                </form>
+
+                <div class="list-heading">
+                    <h3>Your study list</h3>
+                    <span id="topic-count" class="muted">0 topics</span>
+                </div>
+                <ul id="topic-list" class="topic-list" aria-label="Topics"></ul>
+                <p id="empty-topics" class="empty-state">Add a subject, then add your first topic.</p>
+            </section>
+
+            <aside class="side-column">
+                <section id="progress" class="card progress-card" aria-labelledby="progress-heading">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">LOOK HOW FAR YOU’VE COME</p>
+                            <h2 id="progress-heading">Your progress</h2>
+                        </div>
+                        <span id="progress-percentage" class="progress-number">0%</span>
+                    </div>
+                    <div id="progress-bar" class="progress-track" role="progressbar"
+                         aria-label="Topics completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <p id="progress-summary" class="muted">Add topics to start tracking your progress.</p>
+                    <ul id="subject-progress" class="subject-progress" aria-label="Progress by subject"></ul>
+                </section>
+
+                <section id="sos" class="card sos-card" aria-labelledby="sos-heading">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">WHEN TIME IS TIGHT</p>
+                            <h2 id="sos-heading">SOS mode</h2>
+                        </div>
+                        <span class="sos-badge" aria-hidden="true">!</span>
+                    </div>
+                    <p class="muted sos-copy">Your priority topics rise to the top, so you know what to revise next.</p>
+                    <button id="sos-toggle" class="button button-sos" type="button" aria-pressed="false">Enable SOS mode</button>
+                    <ul id="urgent-topics" class="urgent-list" aria-live="polite"></ul>
+                </section>
+            </aside>
+        </div>
+    </main>
+
+    <footer>StudySOS <span aria-hidden="true">✦</span> Your study plan is saved on this device.</footer>
+</body>
+</html>
